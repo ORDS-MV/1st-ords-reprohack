@@ -1,170 +1,111 @@
 ---
-title: ORDS ReproHack intro talk
+title: Intro talk
 tags: Reprohack, ORDS
 description: View the slide with "Slide Mode".
+slideOptions:
+  theme: white
+  transition: 'fade'
+  controls: true
+  progress: true
 ---
 
 # Welcome to the 1st ORDS ReproHack
 
-![](https://github.com/ORDS-Rostock/1st-ords-reprohack/blob/main/reprohack-rostock.png?raw=true)
+<img src="https://github.com/ORDS-Rostock/1st-ords-reprohack/blob/main/reprohack-rostock.png?raw=true" alt="drawing" width="150"/>
 
-<!-- Put the link to this slide here so people can follow -->
-slide: https://hackmd.io/p/template-Talk-slide
+Please sign in on the Hackpad: https://tinyurl.com/ORDS-ReproHack
+
+It contains all event information and links to materials.
+
+:clap: from the whole ReproHack team: Frank, Anja, Max and Manu
+
+---
+<img src="https://github.com/ORDS-Rostock/1st-ords-reprohack/blob/main/Hackmd-screenshot.png?raw=true" alt="drawing" width=100%/>
 
 ---
 
-We have a collaborative session
+## Who we are
 
-please prepare laptop or smartphone to join!
+- *ORDS-team in the Science region **Rostock***
+    - **Frank Krüger** (Uni Rostock, Institute of Communications Engineering)
+    - **Anja Eggert** (Institute for Farm Animal Biology)
+    - **Max Schröder** (Uni Rostock, Institute of Communications Engineering)
+    - **Manuela Reichelt** (Institute for Farm Animal Biology)
 
----
-
-## Who we are?
-
-- ORDS-team in **Science region** Rostock
-    - Frank Krüger (Uni Rostock, Institute of Communications Engineering)
-    - Anja Eggert (Institute for Farm Animal Biology)
-    - Max Schröder (Uni Rostock, Institute of Communications Engineering)
-    - Manuela Reichelt (Institute for Farm Animal Biology)
-- **Thuringian** Competence Network for Research Data Management
-    - Jessica Rex
-    - Kevin Lang
-    - Roman Gerlach
+- ***Thuringian** Competence Network for Research Data Management*
 
 ---
 
-### 70% of our users are developers. Developers :heart: GitHub.
+# How we start
+
+**9:30 - Opening and virtual come together**
+
+* Introduction ORDS
+* Icebreaker
+* Introduction TKFDM
+* Our ORDS-ReproHack variety
+* The today's scientific article
+* Selection of teams 
 
 ---
 
-{%youtube E8Nj7RwXf0s %}
+# Who is ORDS?
+
+- :boom: We are a scientific network at the Graduate Academy of the University of Rostock.
+- :boom: We want to bundle regional expertise in the fields of data analysis and statistics with open and reproducible science in the Rostock-science-region.
+- :boom: We focus on the exchange of expertise between doctoral candidates and postdocs and all other interested scientists.
 
 ---
 
-### Usage flow
+# Icebreaker
+
+<img src="https://github.com/ORDS-Rostock/1st-ords-reprohack/blob/main/ice-breaker-featured-image.jpg?raw=true" alt="drawing" width=60%/>
+
+---
+
+# Icebreaker - Your turn
+
+## Break-out rooms (7 mins)
+
+- [ ] Who are you?
+- [ ] Why are you here?
+- [ ] What is your level of repro-experience?
+- [ ] What is your favorite (new) hobby after a year of on/off Corona lock down?
+
+**As a group: name your room!**
+- [ ] What do you have in common?
+
+---
+
+# Who is TKFDM?
+
+<img src="https://github.com/ORDS-Rostock/1st-ords-reprohack/blob/main/tkfdm_logo_transparent_v1.png?raw=true" alt="drawing" width="200"/>
+
+---
+
+# ReproHack objectives
+
+1. Practical Experience in Reproducibility
+2. Feedback to Authors
+3. Networking and promoting open and reproducible data science
+
+*Event governed by ReproHack Code of Conduct bit.ly/reprohack-coc*
+
+---
+
+# Our *ORDS*-ReproHack variety
+ 
+ - We chose only **one** scientific article by Luis M. Vilches-Blázquez & Daniela Ballari.
+ - You can either join the teams *Beginners*, *Advanced*, or *Experts* (or work individually)
+
+<img src="https://github.com/ORDS-Rostock/1st-ords-reprohack/blob/main/ReproHack-paper_Vilches-Ballari.png?raw=true" alt="drawing" width=100%/>
 
 ---
 
 
-```graphviz
-digraph {
-  compound=true
-  rankdir=RL
-
-  graph [ fontname="Source Sans Pro", fontsize=20 ];
-  node [ fontname="Source Sans Pro", fontsize=18];
-  edge [ fontname="Source Sans Pro", fontsize=12 ];
 
 
-  subgraph core {
-    c [label="Hackmd-it \ncore"] [shape=box]
-  }
-  
-  c -> sync [ltail=session lhead=session]
 
-  subgraph cluster1 {
-     concentrate=true
-    a [label="Text source\nGithub, Gitlab, ..."] [shape=box]
-    b [label="HackMD Editor"] [shape=box]
-    sync [label="sync" shape=plaintext ]
-    b -> sync  [dir="both"]
-    sync -> a [dir="both"]
-    label="An edit session"
-  }
-}
-```
 
----
 
-### Architecture of extension
 
----
-
-![](https://i.imgur.com/ij69tPh.png)
-
----
-
-## Content script
-
-- Bind with each page
-- Manipulate DOM
-- Add event listeners
-- Isolated JavaScript environment
-  - It doesn't break things
-
----
-
-# :fork_and_knife: 
-
----
-
-<style>
-code.blue {
-  color: #337AB7 !important;
-}
-code.orange {
-  color: #F7A004 !important;
-}
-</style>
-
-- <code class="orange">onMessage('event')</code>: Register event listener
-- <code class="blue">sendMessage('event')</code>: Trigger event
-
----
-
-# :bulb: 
-
----
-
-- Dead simple API
-- Only cares about application logic
-
----
-
-```typescript
-import * as Channeru from 'channeru'
-
-// setup channel in different page environment, once
-const channel = Channeru.create()
-```
-
----
-
-```typescript
-// in background script
-const fakeLogin = async () => true
-
-channel.answer('isLogin', async () => {
-  return await fakeLogin()
-})
-```
-
-<br>
-
-```typescript
-// in inject script
-const isLogin = await channel.callBackground('isLogin')
-console.log(isLogin) //-> true
-```
-
----
-
-# :100: :muscle: :tada:
-
----
-
-### Wrap up
-
-- Cross envornment commnication
-- A small library to solve messaging pain
-- TypeScript Rocks :tada: 
-
----
-
-### Thank you! :sheep: 
-
-You can find me on
-
-- GitHub
-- Twitter
-- or email me
