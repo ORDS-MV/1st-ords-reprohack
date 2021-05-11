@@ -166,7 +166,7 @@ Participants:
 * Use command to produce HTML: `Rscript -e "library(knitr); knitr::knit2html('Survey_Trend_SDI.Rmd')"` or better: `Rscript -e "library(knitr); rmarkdown::render('Survey_Trend_SDI.Rmd')"`
 * We aim at two different computing environments:
     * [Docker](https://www.docker.com/)
-    * [Nix](nixos.org)
+    * [Nix](https://nixos.org)
 
 
 
