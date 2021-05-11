@@ -18,7 +18,7 @@ Please sign in on the Hackpad: https://tinyurl.com/ORDS-ReproHack
 
 It contains all event information and links to materials.
 
-:clap: from the whole ReproHack team: Frank, Anja, Max and Manu
+**Welcome** from the whole ReproHack team: Frank, Anja, Max and Manu and TKFDM: Jessica, Kevin and Roman
 
 ---
 
